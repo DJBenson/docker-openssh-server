@@ -13,6 +13,13 @@ RUN \
 	curl \
 	logrotate \
 	nano \
+	alpine-sdk \
+	libffi-dev \
+	libressl-dev \
+	python3 \
+	python3-dev \
+	py3-setuptools \
+	ca-certificates \
 	sudo && \
  echo "**** install openssh-server ****" && \
  if [ -z ${OPENSSH_RELEASE+x} ]; then \
@@ -26,7 +33,18 @@ RUN \
  sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && \
  usermod --shell /bin/bash abc && \
  rm -rf \
-	/tmp/*
+	/tmp/* && \
+ easy_install pip && \
+ pip install --upgrade setuptools && \
+ pip install butterfly && \
+ pip install butterfly[themes]
+
+ADD docker/run.sh /opt/run.sh
+
+EXPOSE 57575
+
+CMD ["butterfly.server.py", "--unsecure", "--login", "--host=0.0.0.0", "--port=57575", "--pam_profile=sshd"]
+ENTRYPOINT ["docker/run.sh"]
 
 # add local files
 COPY /root /
