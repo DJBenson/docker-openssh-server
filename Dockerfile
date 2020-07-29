@@ -21,6 +21,11 @@ RUN \
 	py3-setuptools \
 	ca-certificates \
 	sudo && \
+	easy_install pip && \
+ 	pip install --upgrade setuptools && \
+ 	echo "**** install butterfly-server ****" && \
+ 	pip install butterfly && \
+ 	pip install butterfly[themes] && \
  echo "**** install openssh-server ****" && \
  if [ -z ${OPENSSH_RELEASE+x} ]; then \
 	OPENSSH_RELEASE=$(curl -s http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/ \
@@ -33,12 +38,7 @@ RUN \
  sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && \
  usermod --shell /bin/bash abc && \
  rm -rf \
-	/tmp/* && \
- easy_install pip && \
- pip install --upgrade setuptools && \
- echo "**** install butterfly-server ****" && \
- pip install butterfly && \
- pip install butterfly[themes]
+	/tmp/*
 
 ADD docker/run.sh /opt/run.sh
 
