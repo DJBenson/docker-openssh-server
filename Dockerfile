@@ -21,7 +21,7 @@ RUN \
 	py3-setuptools \
 	ca-certificates \
 	sudo && \
-	easy_install pip && \
+	easy_install-3.8 pip && \
  	pip install --upgrade setuptools && \
  	echo "**** install butterfly-server ****" && \
  	pip install butterfly && \
