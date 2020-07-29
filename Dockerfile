@@ -25,7 +25,6 @@ RUN \
  	pip install --upgrade setuptools && \
  	echo "**** install butterfly-server ****" && \
  	pip install butterfly && \
- 	pip install butterfly[themes] && \
  echo "**** install openssh-server ****" && \
  if [ -z ${OPENSSH_RELEASE+x} ]; then \
 	OPENSSH_RELEASE=$(curl -s http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/ \
