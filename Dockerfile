@@ -36,6 +36,7 @@ RUN \
 	/tmp/* && \
  easy_install pip && \
  pip install --upgrade setuptools && \
+ echo "**** install butterfly-server ****" && \
  pip install butterfly && \
  pip install butterfly[themes]
 
